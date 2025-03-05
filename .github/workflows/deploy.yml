@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   test:
-    name: Test
+    name: Deploy ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
