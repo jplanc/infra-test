@@ -26,8 +26,17 @@ jobs:
       - name: Display vars
         run: |
           echo "Sha short: $SHA_SHORT"
+          echo "Github ref: ${{ github.ref }}"
           echo "Github ref_name: ${{ github.ref_name }}"
-          echo "Github ref:  ${{ github.ref }}"
+          echo "Github ref_type: ${{ github.ref_type }}"
+
+      - name: Tag command
+        run: |
+          if "${{ github.ref_type }}" == "tag"; then
+            echo "docker_image = image-name:${{ github.ref_name }}"
+          else
+            echo "docker_image = image-name:$SHA_SHORT"
+          fi
 
 #      - name: Build
 #        run: docker build -t ghcr.io/shardeum/multisig-app:$SHA_SHORT .
