@@ -20,9 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Vars
+      - name: Generage sha short
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Display vars
         run: |
-          echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "Sha short: $SHA_SHORT"
           echo "Tag name: ${{ github.ref_name }}"
 
