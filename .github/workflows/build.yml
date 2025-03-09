@@ -26,7 +26,8 @@ jobs:
       - name: Display vars
         run: |
           echo "Sha short: $SHA_SHORT"
-          echo "Tag name: ${{ github.ref_name }}"
+          echo "Github ref_name: ${{ github.ref_name }}"
+          echo "Github ref:  ${{ github.ref }}"
 
 #      - name: Build
 #        run: docker build -t ghcr.io/shardeum/multisig-app:$SHA_SHORT .
