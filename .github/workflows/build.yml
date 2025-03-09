@@ -1,0 +1,36 @@
+name: 'Docker Build and Push'
+
+on:
+  workflow_dispatch:
+  push:
+#    branches:
+#      - 'dev'
+    tags:
+
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker_build:
+    name: 'Docker Build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Vars
+        run: |
+          echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "Sha short: $SHA_SHORT"
+          echo "Tag name: ${{ github.ref_name }}"
+
+#      - name: Build
+#        run: docker build -t ghcr.io/shardeum/multisig-app:$SHA_SHORT .
+#
+#      - name: Auth
+#        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+#
+#      - name: Push
+#        run: docker push ghcr.io/shardeum/multisig-app:$SHA_SHORT
